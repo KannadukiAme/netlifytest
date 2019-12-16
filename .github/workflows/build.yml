@@ -1,0 +1,20 @@
+name: 构建
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: yarn
+      - run: yarn build
+      - name: GitHub Pages Deploy
+        uses: maxheld83/ghpages@v0.2.1
